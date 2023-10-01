@@ -1417,6 +1417,76 @@ BlackAndWhiteNoise.prototype.process = function (
   }
 };
 
+function HorizontalScanLines() {
+  MarvalAbstractImagePlugin.super(this);
+  this.load();
+}
+
+HorizontalScanLines.prototype.load = function () {};
+
+HorizontalScanLines.prototype.process = function (
+  imageIn,
+  imageOut,
+  attributesOut,
+  mask,
+  previewMode
+) {
+  intensity = this.getAttribute("intensity");
+  var l_arrMask = mask.getMask();
+
+  var r, g, b;
+  for (var x = 0; x < imageIn.getWidth(); x++) {
+    for (var y = 0; y < imageIn.getHeight(); y += 2) {
+      if (l_arrMask != null && !l_arrMask[x][y]) {
+        continue;
+      }
+      r = imageIn.getIntComponent0(x, y) - intensity;
+      g = imageIn.getIntComponent1(x, y) - intensity;
+      b = imageIn.getIntComponent2(x, y) - intensity;
+
+      imageOut.setIntColor(x, y, imageIn.getAlphaComponent(x, y), r, g, b);
+      if (y + 2 > imageIn.getHeight()) {
+        break;
+      }
+    }
+  }
+};
+
+function VerticalScanLines() {
+  MarvalAbstractImagePlugin.super(this);
+  this.load();
+}
+
+VerticalScanLines.prototype.load = function () {};
+
+VerticalScanLines.prototype.process = function (
+  imageIn,
+  imageOut,
+  attributesOut,
+  mask,
+  previewMode
+) {
+  intensity = this.getAttribute("intensity");
+  var l_arrMask = mask.getMask();
+
+  var r, g, b;
+  for (var y = 0; y < imageIn.getHeight(); y++) {
+    for (var x = 0; x < imageIn.getWidth(); x += 2) {
+      if (l_arrMask != null && !l_arrMask[x][y]) {
+        continue;
+      }
+      r = imageIn.getIntComponent0(x, y) - intensity;
+      g = imageIn.getIntComponent1(x, y) - intensity;
+      b = imageIn.getIntComponent2(x, y) - intensity;
+
+      imageOut.setIntColor(x, y, imageIn.getAlphaComponent(x, y), r, g, b);
+      if (x + 2 > imageIn.getWidth()) {
+        break;
+      }
+    }
+  }
+};
+
 function Sepia() {
   MarvalAbstractImagePlugin.super(this);
   this.load();
@@ -3367,6 +3437,38 @@ var marvalLoadPluginMethods = function (callback) {
       Marval.getValue(intensity, 0.5)
     );
     Marval.plugins.blackAndWhiteNoise.process(
+      imageIn,
+      imageOut,
+      null,
+      MarvalImageMask.NULL_MASK,
+      false
+    );
+  };
+
+  // HorizontalScanLines
+  Marval.plugins.horizontalScanLines = new HorizontalScanLines();
+  Marval.horizontalScanLines = function (imageIn, imageOut, intensity) {
+    Marval.plugins.horizontalScanLines.setAttribute(
+      "intensity",
+      Marval.getValue(intensity, 64)
+    );
+    Marval.plugins.horizontalScanLines.process(
+      imageIn,
+      imageOut,
+      null,
+      MarvalImageMask.NULL_MASK,
+      false
+    );
+  };
+
+  // VerticalScanLines
+  Marval.plugins.verticalScanLines = new VerticalScanLines();
+  Marval.verticalScanLines = function (imageIn, imageOut, intensity) {
+    Marval.plugins.verticalScanLines.setAttribute(
+      "intensity",
+      Marval.getValue(intensity, 64)
+    );
+    Marval.plugins.verticalScanLines.process(
       imageIn,
       imageOut,
       null,

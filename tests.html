@@ -203,6 +203,30 @@
         <canvas id="blackAndWhiteNoise" width="740" height="400" style="display:inline-block"></canvas>
       </div>
     </div>
+
+    <h2>horizontalScanLines</h2>
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="horizontalScanLines" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
+
+    <h2>verticalScanLines</h2>
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="verticalScanLines" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
   </div>
   <script>
     let image = new MarvalImage();
@@ -264,6 +288,14 @@
       imageOut = image.clone();
       Marval.blackAndWhiteNoise(image, imageOut, 0.5);
       imageOut.draw(document.getElementById("blackAndWhiteNoise"));
+
+      imageOut = image.clone();
+      Marval.horizontalScanLines(image, imageOut, 32);
+      imageOut.draw(document.getElementById("horizontalScanLines"));
+
+      imageOut = image.clone();
+      Marval.verticalScanLines(image, imageOut, 32);
+      imageOut.draw(document.getElementById("verticalScanLines"));
     }
   </script>
 </body>
