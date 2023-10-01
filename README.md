@@ -3,7 +3,6 @@ MarvalJ was created as a fork of MarvinJ which hasn't been updated in four years
 
 ## Running
 You can download the JavaScript file and import it into the HTML body of a webpage like so:
-
 ```
 <body>
   <script src="marvalj_0.3.0.js"></script>
@@ -11,6 +10,14 @@ You can download the JavaScript file and import it into the HTML body of a webpa
 </body>
 
 ```
+
+Alternatively, you can import MarvalJ from the web like this:
+```
+  <script src="https://m-valentino.github.io/MarvalJ/marvalj_0.3.0.js"></script>
+```
+
+You can see code examples in tests.html.
+
 ## Documentation
 All functions and variables in MarvalJ are the same as MarvinJ with the exception that all instances of "Marvin" or "marvin" are "Marval" or "marval".
 
