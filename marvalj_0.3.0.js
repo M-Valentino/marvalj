@@ -1487,6 +1487,51 @@ VerticalScanLines.prototype.process = function (
   }
 };
 
+function ColorSort() {
+  MarvalAbstractImagePlugin.super(this);
+  this.load();
+}
+
+ColorSort.prototype.load = function () {};
+
+ColorSort.prototype.process = function (
+  imageIn,
+  imageOut,
+  attributesOut,
+  mask,
+  previewMode
+) {
+
+  function dec2hex(dec) {
+    var hex = (+dec).toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  }
+
+  var joinedColors = [imageIn.getWidth() * imageIn.getHeight()];
+  var jCIndex = 0;
+  for (var x = 0; x < imageIn.getWidth(); x++) {
+    for (var y = 0; y < imageIn.getHeight(); y++) {
+      joinedColors[jCIndex] = 
+      dec2hex(imageIn.getIntComponent0(x, y)) +
+      dec2hex(imageIn.getIntComponent1(x, y)) +
+      dec2hex(imageIn.getIntComponent2(x, y));
+      jCIndex++;
+    }
+  }
+  joinedColors.sort();
+  jCIndex = 0;
+  var r, g, b;
+  for (var x = 0; x < imageIn.getWidth(); x++) {
+    for (var y = 0; y < imageIn.getHeight(); y++) {
+      r = Number(`0x${joinedColors[jCIndex].substring(0, 2)}`);
+      g = Number(`0x${joinedColors[jCIndex].substring(2, 4)}`);
+      b = Number(`0x${joinedColors[jCIndex].substring(4, 6)}`);
+      jCIndex++;
+      imageOut.setIntColor(x, y, imageIn.getAlphaComponent(x, y), r, g, b);
+    }
+  }
+};
+
 function Sepia() {
   MarvalAbstractImagePlugin.super(this);
   this.load();
@@ -3476,6 +3521,18 @@ var marvalLoadPluginMethods = function (callback) {
       false
     );
   };
+
+    // ColorSort
+    Marval.plugins.colorSort = new ColorSort();
+    Marval.colorSort = function (imageIn, imageOut) {
+      Marval.plugins.colorSort.process(
+        imageIn,
+        imageOut,
+        null,
+        MarvalImageMask.NULL_MASK,
+        false
+      );
+    };
 
   Marval.plugins.iteratedFunctionSystem = new IteratedFunctionSystem();
   Marval.iteratedFunctionSystem = function (
