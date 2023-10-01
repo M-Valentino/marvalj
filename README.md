@@ -14,5 +14,13 @@ You can download the JavaScript file and import it into the HTML body of a webpa
 ## Documentation
 All functions and variables in MarvalJ are the same as MarvinJ with the exception that all instances of "Marvin" or "marvin" are "Marval" or "marval".
 
+MarvalJ has two functions MarvinJ doesn't have.
+
+### Marval.blackAndWhiteNoise(imageIn, imageOut, intensity)	
+Given an input image imageIn, an output image imageOut and an intensity, applies random black and white noise to pixels. intensity has a range of 0 to 1.0.
+
+### Marval.colorNoise(imageIn, imageOut, intensity)	
+Given an input image imageIn, an output image imageOut and an intensity, applies random color noise to pixels. intensity has a range of 0 to 1.0.
+
 See MarvinJ's documentation:
 https://www.marvinj.org/en/algorithms.html

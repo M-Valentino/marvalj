@@ -1343,6 +1343,80 @@ Invert.prototype.process = function (
     }
   }
 };
+
+function ColorNoise() {
+  MarvalAbstractImagePlugin.super(this);
+  this.load();
+}
+
+ColorNoise.prototype.load = function () {};
+
+ColorNoise.prototype.process = function (
+  imageIn,
+  imageOut,
+  attributesOut,
+  mask,
+  previewMode
+) {
+  noiseWeight = this.getAttribute("intensity");
+  imageWeight = 1 - noiseWeight;
+  var l_arrMask = mask.getMask();
+
+  var r, g, b;
+  for (var x = 0; x < imageIn.getWidth(); x++) {
+    for (var y = 0; y < imageIn.getHeight(); y++) {
+      if (l_arrMask != null && !l_arrMask[x][y]) {
+        continue;
+      }
+      r =
+        Math.random() * 255 * noiseWeight +
+        imageIn.getIntComponent0(x, y) * imageWeight;
+      g =
+        Math.random() * 255 * noiseWeight +
+        imageIn.getIntComponent1(x, y) * imageWeight;
+      b =
+        Math.random() * 255 * noiseWeight +
+        imageIn.getIntComponent2(x, y) * imageWeight;
+
+      imageOut.setIntColor(x, y, imageIn.getAlphaComponent(x, y), r, g, b);
+    }
+  }
+};
+
+function BlackAndWhiteNoise() {
+  MarvalAbstractImagePlugin.super(this);
+  this.load();
+}
+
+BlackAndWhiteNoise.prototype.load = function () {};
+
+BlackAndWhiteNoise.prototype.process = function (
+  imageIn,
+  imageOut,
+  attributesOut,
+  mask,
+  previewMode
+) {
+  noiseWeight = this.getAttribute("intensity");
+  imageWeight = 1 - noiseWeight;
+  var l_arrMask = mask.getMask();
+
+  var r, g, b, noise;
+  for (var x = 0; x < imageIn.getWidth(); x++) {
+    for (var y = 0; y < imageIn.getHeight(); y++) {
+      if (l_arrMask != null && !l_arrMask[x][y]) {
+        continue;
+      }
+      noise = Math.random() * 255 * noiseWeight;
+      r = noise + imageIn.getIntComponent0(x, y) * imageWeight;
+      g = noise + imageIn.getIntComponent1(x, y) * imageWeight;
+      b = noise + imageIn.getIntComponent2(x, y) * imageWeight;
+
+      imageOut.setIntColor(x, y, imageIn.getAlphaComponent(x, y), r, g, b);
+    }
+  }
+};
+
 function Sepia() {
   MarvalAbstractImagePlugin.super(this);
   this.load();
@@ -3261,6 +3335,38 @@ var marvalLoadPluginMethods = function (callback) {
   Marval.plugins.invertColors = new Invert();
   Marval.invertColors = function (imageIn, imageOut) {
     Marval.plugins.invertColors.process(
+      imageIn,
+      imageOut,
+      null,
+      MarvalImageMask.NULL_MASK,
+      false
+    );
+  };
+
+  // ColorNoise
+  Marval.plugins.colorNoise = new ColorNoise();
+  Marval.colorNoise = function (imageIn, imageOut, intensity) {
+    Marval.plugins.colorNoise.setAttribute(
+      "intensity",
+      Marval.getValue(intensity, 0.5)
+    );
+    Marval.plugins.colorNoise.process(
+      imageIn,
+      imageOut,
+      null,
+      MarvalImageMask.NULL_MASK,
+      false
+    );
+  };
+
+  // BlackAndWhiteNoise
+  Marval.plugins.blackAndWhiteNoise = new BlackAndWhiteNoise();
+  Marval.blackAndWhiteNoise = function (imageIn, imageOut, intensity) {
+    Marval.plugins.blackAndWhiteNoise.setAttribute(
+      "intensity",
+      Marval.getValue(intensity, 0.5)
+    );
+    Marval.plugins.blackAndWhiteNoise.process(
       imageIn,
       imageOut,
       null,
