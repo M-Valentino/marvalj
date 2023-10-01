@@ -35,8 +35,9 @@
 
 <body>
   <script src="marvalj-0_0.js"></script>
-  <h2>alphaBoundary</h2>
   <div class="tests">
+    <h2>alphaBoundary</h2>
+
     <div class="testContainer">
       <div class="imageContainter">
         <label>Original</label>
@@ -48,94 +49,143 @@
       </div>
     </div>
     <h2>brightnessAndConstrast</h2>
-    <div class="tests">
-      <div class="testContainer">
-        <div class="imageContainter">
-          <label>Original</label>
-          <img src="https://i.imgur.com/XRQzVKJ.png">
-        </div>
-        <div class="imageContainter">
-          <label>Result</label>
-          <canvas id="brightnessAndContrast" width="740" height="400" style="display:inline-block"></canvas>
-        </div>
+
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
       </div>
-      <h2>blackAndWhite</h2>
-    <div class="tests">
-      <div class="testContainer">
-        <div class="imageContainter">
-          <label>Original</label>
-          <img src="https://i.imgur.com/XRQzVKJ.png">
-        </div>
-        <div class="imageContainter">
-          <label>Result</label>
-          <canvas id="blackAndWhite" width="740" height="400" style="display:inline-block"></canvas>
-        </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="brightnessAndContrast" width="740" height="400" style="display:inline-block"></canvas>
       </div>
-      <h2>colorChannel</h2>
-      <div class="testContainer">
-        <div class="imageContainter">
-          <label>Original</label>
-          <img src="https://i.imgur.com/XRQzVKJ.png">
-        </div>
-        <div class="imageContainter">
-          <label>Result</label>
-          <canvas id="colorChannel" width="740" height="400" style="display:inline-block"></canvas>
-        </div>
+    </div>
+    <h2>blackAndWhite</h2>
+
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
       </div>
-      <h2>emboss</h2>
-      <div class="testContainer">
-        <div class="imageContainter">
-          <label>Original</label>
-          <img src="https://i.imgur.com/XRQzVKJ.png">
-        </div>
-        <div class="imageContainter">
-          <label>Result</label>
-          <canvas id="emboss" width="740" height="400" style="display:inline-block"></canvas>
-        </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="blackAndWhite" width="740" height="400" style="display:inline-block"></canvas>
       </div>
-      <h2>gaussianBlur</h2>
-      <div class="tests">
-        <div class="testContainer">
-          <div class="imageContainter">
-            <label>Original</label>
-            <img src="https://i.imgur.com/XRQzVKJ.png">
-          </div>
-          <div class="imageContainter">
-            <label>Result</label>
-            <canvas id="gaussianBlur" width="740" height="400" style="display:inline-block"></canvas>
-          </div>
-        </div>
+    </div>
+    <h2>colorChannel</h2>
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
       </div>
-      <script>
-        let image = new MarvalImage();
-        image.load("https://i.imgur.com/XRQzVKJ.png", imageLoaded);
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="colorChannel" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
+    <h2>emboss</h2>
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="emboss" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
+    <h2>gaussianBlur</h2>
 
-        function imageLoaded() {
-          let imageOut = image.clone();
-          Marval.alphaBoundary(image, imageOut, 50.0);
-          imageOut.draw(document.getElementById("alphaBoundary"));
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="gaussianBlur" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
 
-          imageOut = image.clone();
-          Marval.blackAndWhite(image, imageOut, 10);
-          imageOut.draw(document.getElementById("blackAndWhite"));
+    <h2>grayScale</h2>
 
-          imageOut = image.clone();
-          Marval.brightnessAndContrast(image, imageOut, 20, 40);
-          imageOut.draw(document.getElementById("brightnessAndContrast"));
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="grayScale" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
+    <h2>invertColors</h2>
 
-          imageOut = image.clone();
-          Marval.colorChannel(image, imageOut, 0, -12, -8);
-          imageOut.draw(document.getElementById("colorChannel"));
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="invertColors" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
+    <h2>prewitt</h2>
 
-          imageOut = image.clone();
-          Marval.emboss(image, imageOut);
-          imageOut.draw(document.getElementById("emboss"));
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="prewitt" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
+  </div>
+  <script>
+    let image = new MarvalImage();
+    image.load("https://i.imgur.com/XRQzVKJ.png", imageLoaded);
 
-          imageOut = image.clone();
-          Marval.gaussianBlur(image, imageOut, 7.0);
-          imageOut.draw(document.getElementById("gaussianBlur"));
-        }
-      </script>
+    function imageLoaded() {
+      let imageOut = image.clone();
+      Marval.alphaBoundary(image, imageOut, 50.0);
+      imageOut.draw(document.getElementById("alphaBoundary"));
+
+      imageOut = image.clone();
+      Marval.blackAndWhite(image, imageOut, 10);
+      imageOut.draw(document.getElementById("blackAndWhite"));
+
+      imageOut = image.clone();
+      Marval.brightnessAndContrast(image, imageOut, 20, 40);
+      imageOut.draw(document.getElementById("brightnessAndContrast"));
+
+      imageOut = image.clone();
+      Marval.colorChannel(image, imageOut, 0, -12, -8);
+      imageOut.draw(document.getElementById("colorChannel"));
+
+      imageOut = image.clone();
+      Marval.emboss(image, imageOut);
+      imageOut.draw(document.getElementById("emboss"));
+
+      imageOut = image.clone();
+      Marval.gaussianBlur(image, imageOut, 7.0);
+      imageOut.draw(document.getElementById("gaussianBlur"));
+
+      imageOut = image.clone();
+      Marval.grayScale(image, imageOut);
+      imageOut.draw(document.getElementById("grayScale"));
+
+      imageOut = image.clone();
+      Marval.invertColors(image, imageOut);
+      imageOut.draw(document.getElementById("invertColors"));
+
+      imageOut = image.clone();
+      Marval.prewitt(image, imageOut, 4);
+      imageOut.draw(document.getElementById("prewitt"));
+    }
+  </script>
 </body>
 
 </html>
