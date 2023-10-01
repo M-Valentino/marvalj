@@ -1,21 +1,18 @@
-# MarvinJ
-MarvinJ was created to be the Javascript version of Marvin Image Processing Framework aiming to provide the same features in the web, server and mobile platforms powered by Javascript.
+# MarvalJ
+MarvalJ was created as a fork of MarvinJ which hasn't been updated in four years. MarvalJ aims to expand upon the features MarvinJ has, as well as improving performance.
 
-If you are not familiar with Marvin Framework and want to play with MarvinJ, don't worry. The rest of this article shows the basic image processing features of MarvinJ using JSFiddle snippets that you can make your own version and play with it.
-
-### Image Loading
-In the case of MarvinJ we load images from URLs and usually use a HTML5 canvas for displaying processed images.
+## Running
+You can download the JavaScript file and import it into the HTML body of a webpage like so:
 
 ```
-var canvas = document.getElementById("canvas");
-var image = new MarvinImage();
+<body>
+  <script src="marvalj-0_0.js"></script>
+  ....
+</body>
 
-image.load("https://i.imgur.com/4O8VFQY.jpg", function(){
-   image.draw(canvas);
-});
 ```
-Continue Reading:
+## Documentation
+All functions and variables in MarvalJ are the same as MarvinJ with the exception that all instances of "Marvin" or "marvin" are "Marval" or "marval".
 
-### "Playing with image processing in Javascript using MarvinJ 1.0 (JSFiddle Examples)"
-http://marvinj.org/en/releases/marvinj_1.0.html
-
+See MarvinJ's documentation:
+https://www.marvinj.org/en/algorithms.html
