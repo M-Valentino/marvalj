@@ -58,6 +58,17 @@
         <canvas id="colorChannel" width="740" height="400" style="display:inline-block"></canvas>
       </div>
     </div>
+    <h2>Emboss</h2>
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/5fs2joH.jpg">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="emboss" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
   </div>
   <script>
     let image = new MarvinImage();
@@ -71,9 +82,11 @@
       imageOut = image.clone();
       Marvin.colorChannel(image, imageOut, 0, -12, -8);
       imageOut.draw(document.getElementById("colorChannel"));
+
+      imageOut = image.clone();
+      Marvin.emboss(image, imageOut);
+      imageOut.draw(document.getElementById("emboss"));
     }
-
-
   </script>
 </body>
 
