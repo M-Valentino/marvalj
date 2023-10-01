@@ -35,59 +35,107 @@
 
 <body>
   <script src="marvalj-0_0.js"></script>
-  <h2>Gaussian Blur</h2>
+  <h2>alphaBoundary</h2>
   <div class="tests">
     <div class="testContainer">
       <div class="imageContainter">
         <label>Original</label>
-        <img src="https://i.imgur.com/5fs2joH.jpg">
+        <img src="https://i.imgur.com/XRQzVKJ.png">
       </div>
       <div class="imageContainter">
         <label>Result</label>
-        <canvas id="gaussianBlur" width="740" height="400" style="display:inline-block"></canvas>
+        <canvas id="alphaBoundary" width="740" height="400" style="display:inline-block"></canvas>
       </div>
     </div>
-    <h2>Color Channel</h2>
-    <div class="testContainer">
-      <div class="imageContainter">
-        <label>Original</label>
-        <img src="https://i.imgur.com/5fs2joH.jpg">
+    <h2>brightnessAndConstrast</h2>
+    <div class="tests">
+      <div class="testContainer">
+        <div class="imageContainter">
+          <label>Original</label>
+          <img src="https://i.imgur.com/XRQzVKJ.png">
+        </div>
+        <div class="imageContainter">
+          <label>Result</label>
+          <canvas id="brightnessAndContrast" width="740" height="400" style="display:inline-block"></canvas>
+        </div>
       </div>
-      <div class="imageContainter">
-        <label>Result</label>
-        <canvas id="colorChannel" width="740" height="400" style="display:inline-block"></canvas>
+      <h2>blackAndWhite</h2>
+    <div class="tests">
+      <div class="testContainer">
+        <div class="imageContainter">
+          <label>Original</label>
+          <img src="https://i.imgur.com/XRQzVKJ.png">
+        </div>
+        <div class="imageContainter">
+          <label>Result</label>
+          <canvas id="blackAndWhite" width="740" height="400" style="display:inline-block"></canvas>
+        </div>
       </div>
-    </div>
-    <h2>Emboss</h2>
-    <div class="testContainer">
-      <div class="imageContainter">
-        <label>Original</label>
-        <img src="https://i.imgur.com/5fs2joH.jpg">
+      <h2>colorChannel</h2>
+      <div class="testContainer">
+        <div class="imageContainter">
+          <label>Original</label>
+          <img src="https://i.imgur.com/XRQzVKJ.png">
+        </div>
+        <div class="imageContainter">
+          <label>Result</label>
+          <canvas id="colorChannel" width="740" height="400" style="display:inline-block"></canvas>
+        </div>
       </div>
-      <div class="imageContainter">
-        <label>Result</label>
-        <canvas id="emboss" width="740" height="400" style="display:inline-block"></canvas>
+      <h2>emboss</h2>
+      <div class="testContainer">
+        <div class="imageContainter">
+          <label>Original</label>
+          <img src="https://i.imgur.com/XRQzVKJ.png">
+        </div>
+        <div class="imageContainter">
+          <label>Result</label>
+          <canvas id="emboss" width="740" height="400" style="display:inline-block"></canvas>
+        </div>
       </div>
-    </div>
-  </div>
-  <script>
-    let image = new MarvinImage();
-    image.load("https://i.imgur.com/5fs2joH.jpg", imageLoaded);
+      <h2>gaussianBlur</h2>
+      <div class="tests">
+        <div class="testContainer">
+          <div class="imageContainter">
+            <label>Original</label>
+            <img src="https://i.imgur.com/XRQzVKJ.png">
+          </div>
+          <div class="imageContainter">
+            <label>Result</label>
+            <canvas id="gaussianBlur" width="740" height="400" style="display:inline-block"></canvas>
+          </div>
+        </div>
+      </div>
+      <script>
+        let image = new MarvinImage();
+        image.load("https://i.imgur.com/XRQzVKJ.png", imageLoaded);
 
-    function imageLoaded() {
-      let imageOut = image.clone();
-      Marvin.gaussianBlur(image, imageOut, 7.0);
-      imageOut.draw(document.getElementById("gaussianBlur"));
+        function imageLoaded() {
+          let imageOut = image.clone();
+          Marvin.alphaBoundary(image, imageOut, 50.0);
+          imageOut.draw(document.getElementById("alphaBoundary"));
 
-      imageOut = image.clone();
-      Marvin.colorChannel(image, imageOut, 0, -12, -8);
-      imageOut.draw(document.getElementById("colorChannel"));
+          imageOut = image.clone();
+          Marvin.blackAndWhite(image, imageOut, 10);
+          imageOut.draw(document.getElementById("blackAndWhite"));
 
-      imageOut = image.clone();
-      Marvin.emboss(image, imageOut);
-      imageOut.draw(document.getElementById("emboss"));
-    }
-  </script>
+          imageOut = image.clone();
+          Marvin.brightnessAndContrast(image, imageOut, 20, 40);
+          imageOut.draw(document.getElementById("brightnessAndContrast"));
+
+          imageOut = image.clone();
+          Marvin.colorChannel(image, imageOut, 0, -12, -8);
+          imageOut.draw(document.getElementById("colorChannel"));
+
+          imageOut = image.clone();
+          Marvin.emboss(image, imageOut);
+          imageOut.draw(document.getElementById("emboss"));
+
+          imageOut = image.clone();
+          Marvin.gaussianBlur(image, imageOut, 7.0);
+          imageOut.draw(document.getElementById("gaussianBlur"));
+        }
+      </script>
 </body>
 
 </html>
