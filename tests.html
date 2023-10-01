@@ -6,44 +6,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    h2 {
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .tests {
+      margin: auto;
+      width: fit-content;
+    }
+
     .testContainer {
       display: flex;
       flex-direction: row;
     }
+
     .imageContainter {
       display: flex;
       flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    label {
+      text-align: center;
     }
   </style>
 </head>
 
 <body>
   <script src="marvalj-0_0.js"></script>
-  <h2>Color Channel</h2>
-  <div class="testContainer">
-    <div class="imageContainter">
-      <label>Original</label>
-      <img src="https://i.imgur.com/5fs2joH.jpg">
+  <h2>Gaussian Blur</h2>
+  <div class="tests">
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/5fs2joH.jpg">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="gaussianBlur" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
     </div>
-    <div class="imageContainter">
-      <label>Result</label>
-      <canvas id="modifiedImage" width="740" height="400" style="display:inline-block"></canvas>
+    <h2>Color Channel</h2>
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/5fs2joH.jpg">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="colorChannel" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
     </div>
   </div>
   <script>
-    let originalImage = document.getElementById("originalImage");
-    let modifiedImage = document.getElementById("modifiedImage");
     let image = new MarvinImage();
+    image.load("https://i.imgur.com/5fs2joH.jpg", imageLoaded);
 
-    image.load("https://i.imgur.com/5fs2joH.jpg", function () {
-      image.draw(originalImage);
-    });
+    function imageLoaded() {
+      let imageOut = image.clone();
+      Marvin.gaussianBlur(image, imageOut, 7.0);
+      imageOut.draw(document.getElementById("gaussianBlur"));
 
-    let resultImage = new MarvinImage();
-    resultImage.load("https://i.imgur.com/5fs2joH.jpg", function () {
-      Marvin.colorChannel(image, image, 0, -12, -8);
-      image.draw(modifiedImage);
-    });
+      imageOut = image.clone();
+      Marvin.colorChannel(image, imageOut, 0, -12, -8);
+      imageOut.draw(document.getElementById("colorChannel"));
+    }
+
 
   </script>
 </body>
