@@ -107,32 +107,32 @@
         </div>
       </div>
       <script>
-        let image = new MarvinImage();
+        let image = new MarvalImage();
         image.load("https://i.imgur.com/XRQzVKJ.png", imageLoaded);
 
         function imageLoaded() {
           let imageOut = image.clone();
-          Marvin.alphaBoundary(image, imageOut, 50.0);
+          Marval.alphaBoundary(image, imageOut, 50.0);
           imageOut.draw(document.getElementById("alphaBoundary"));
 
           imageOut = image.clone();
-          Marvin.blackAndWhite(image, imageOut, 10);
+          Marval.blackAndWhite(image, imageOut, 10);
           imageOut.draw(document.getElementById("blackAndWhite"));
 
           imageOut = image.clone();
-          Marvin.brightnessAndContrast(image, imageOut, 20, 40);
+          Marval.brightnessAndContrast(image, imageOut, 20, 40);
           imageOut.draw(document.getElementById("brightnessAndContrast"));
 
           imageOut = image.clone();
-          Marvin.colorChannel(image, imageOut, 0, -12, -8);
+          Marval.colorChannel(image, imageOut, 0, -12, -8);
           imageOut.draw(document.getElementById("colorChannel"));
 
           imageOut = image.clone();
-          Marvin.emboss(image, imageOut);
+          Marval.emboss(image, imageOut);
           imageOut.draw(document.getElementById("emboss"));
 
           imageOut = image.clone();
-          Marvin.gaussianBlur(image, imageOut, 7.0);
+          Marval.gaussianBlur(image, imageOut, 7.0);
           imageOut.draw(document.getElementById("gaussianBlur"));
         }
       </script>
