@@ -143,6 +143,42 @@
         <canvas id="prewitt" width="740" height="400" style="display:inline-block"></canvas>
       </div>
     </div>
+
+    <h2>scale</h2>
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="scale" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
+
+    <h2>sepia</h2>
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="sepia" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
+
+    <h2>thresholding</h2>
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="thresholding" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
   </div>
   <script>
     let image = new MarvalImage();
@@ -184,6 +220,18 @@
       imageOut = image.clone();
       Marval.prewitt(image, imageOut, 4);
       imageOut.draw(document.getElementById("prewitt"));
+
+      imageOut = image.clone();
+      Marval.scale(image, imageOut, 370, 200);
+      imageOut.draw(document.getElementById("scale"));
+
+      imageOut = image.clone();
+      Marval.sepia(image, imageOut, 50);
+      imageOut.draw(document.getElementById("sepia"));
+
+      imageOut = image.clone();
+      Marval.thresholding(image, imageOut, 50, 100);
+      imageOut.draw(document.getElementById("thresholding"));
     }
   </script>
 </body>
