@@ -6,7 +6,7 @@ You can download the JavaScript file and import it into the HTML body of a webpa
 
 ```
 <body>
-  <script src="marvalj-0_0.js"></script>
+  <script src="marvalj_0.1.js"></script>
   ....
 </body>
 
