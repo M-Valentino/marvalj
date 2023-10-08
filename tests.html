@@ -34,7 +34,7 @@
 </head>
 
 <body>
-  <script src="marvalj_0.3.0.js"></script>
+  <script src="marvalj_0.3.1.js"></script>
   <div class="tests">
     <h2>alphaBoundary</h2>
 
@@ -117,6 +117,18 @@
       <div class="imageContainter">
         <label>Result</label>
         <canvas id="grayScale" width="740" height="400" style="display:inline-block"></canvas>
+      </div>
+    </div>
+    <h2>halftoneErrorDiffusion</h2>
+
+    <div class="testContainer">
+      <div class="imageContainter">
+        <label>Original</label>
+        <img src="https://i.imgur.com/XRQzVKJ.png">
+      </div>
+      <div class="imageContainter">
+        <label>Result</label>
+        <canvas id="halftoneErrorDiffusion" width="740" height="400" style="display:inline-block"></canvas>
       </div>
     </div>
     <h2>invertColors</h2>
@@ -274,6 +286,10 @@
       imageOut.draw(document.getElementById("grayScale"));
 
       imageOut = image.clone();
+      Marval.halftoneErrorDiffusion(image, imageOut);
+      imageOut.draw(document.getElementById("halftoneErrorDiffusion"));
+
+      imageOut = image.clone();
       Marval.invertColors(image, imageOut);
       imageOut.draw(document.getElementById("invertColors"));
 
@@ -310,7 +326,7 @@
       imageOut.draw(document.getElementById("verticalScanLines"));
 
       imageOut = image.clone();
-      Marval.colorSort(image, imageOut);
+      Marval.colorSort(image, imageOut, true);
       imageOut.draw(document.getElementById("colorSort"));
     }
   </script>

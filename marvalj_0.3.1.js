@@ -1501,31 +1501,30 @@ ColorSort.prototype.process = function (
   mask,
   previewMode
 ) {
-
-  function dec2hex(dec) {
-    var hex = (+dec).toString(16);
-    return hex.length === 1 ? '0' + hex : hex;
+  weighted = this.getAttribute("weighted");
+  var r, g, b, brightness;
+  var joinedColors = [];
+  for (var x = 0; x < imageIn.getWidth(); x++) {
+    for (var y = 0; y < imageIn.getHeight(); y++) {
+      r = imageIn.getIntComponent0(x, y);
+      g = imageIn.getIntComponent1(x, y);
+      b = imageIn.getIntComponent2(x, y);
+      brightness = weighted ? r * 0.3 + g * 0.59 + b * 0.11 : r + b + g;
+      joinedColors.push({ r: r, g: g, b: b, brightness: brightness });
+    }
   }
 
-  var joinedColors = [imageIn.getWidth() * imageIn.getHeight()];
+  // Sort the colors based on brightness (from darkest to lightest)
+  joinedColors.sort(function (a, b) {
+    return a.brightness - b.brightness;
+  });
+
   var jCIndex = 0;
   for (var x = 0; x < imageIn.getWidth(); x++) {
     for (var y = 0; y < imageIn.getHeight(); y++) {
-      joinedColors[jCIndex] = 
-      dec2hex(imageIn.getIntComponent0(x, y)) +
-      dec2hex(imageIn.getIntComponent1(x, y)) +
-      dec2hex(imageIn.getIntComponent2(x, y));
-      jCIndex++;
-    }
-  }
-  joinedColors.sort();
-  jCIndex = 0;
-  var r, g, b;
-  for (var x = 0; x < imageIn.getWidth(); x++) {
-    for (var y = 0; y < imageIn.getHeight(); y++) {
-      r = Number(`0x${joinedColors[jCIndex].substring(0, 2)}`);
-      g = Number(`0x${joinedColors[jCIndex].substring(2, 4)}`);
-      b = Number(`0x${joinedColors[jCIndex].substring(4, 6)}`);
+      r = joinedColors[jCIndex].r;
+      g = joinedColors[jCIndex].g;
+      b = joinedColors[jCIndex].b;
       jCIndex++;
       imageOut.setIntColor(x, y, imageIn.getAlphaComponent(x, y), r, g, b);
     }
@@ -3522,17 +3521,20 @@ var marvalLoadPluginMethods = function (callback) {
     );
   };
 
-    // ColorSort
-    Marval.plugins.colorSort = new ColorSort();
-    Marval.colorSort = function (imageIn, imageOut) {
-      Marval.plugins.colorSort.process(
-        imageIn,
-        imageOut,
-        null,
-        MarvalImageMask.NULL_MASK,
-        false
-      );
-    };
+  // ColorSort
+  Marval.plugins.colorSort = new ColorSort();
+  Marval.colorSort = function (imageIn, imageOut, weighted) {
+    Marval.plugins.colorSort.setAttribute(
+      "weighted", weighted
+    );
+    Marval.plugins.colorSort.process(
+      imageIn,
+      imageOut,
+      null,
+      MarvalImageMask.NULL_MASK,
+      false
+    );
+  };
 
   Marval.plugins.iteratedFunctionSystem = new IteratedFunctionSystem();
   Marval.iteratedFunctionSystem = function (

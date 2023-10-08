@@ -5,7 +5,7 @@ MarvalJ was created as a fork of MarvinJ which hasn't been updated in four years
 You can download the JavaScript file and import it into the HTML body of a webpage like so:
 ```
 <body>
-  <script src="marvalj_0.3.0.js"></script>
+  <script src="marvalj_0.3.1.js"></script>
   ....
 </body>
 
@@ -13,7 +13,7 @@ You can download the JavaScript file and import it into the HTML body of a webpa
 
 Alternatively, you can import MarvalJ from the web like this:
 ```
-  <script src="https://m-valentino.github.io/MarvalJ/marvalj_0.3.0.js"></script>
+  <script src="https://m-valentino.github.io/MarvalJ/marvalj_0.3.1.js"></script>
 ```
 
 You can see code examples in tests.html.
@@ -35,8 +35,8 @@ Given an input image imageIn, an output image imageOut, and an intensity, applie
 ### Marval.verticalScanLines(imageIn, imageOut, intensity)
 Given an input image imageIn, an output image imageOut, and an intensity, applies vertical scan lines to the image. intensity has a range of 0 to 255.
 
-### Marval.colorSort(imageIn, imageOut)
-Given an input image imageIn and an output image imageOut, sorts all the pixels in the image by their hex color.
+### Marval.colorSort(imageIn, imageOut, weighted)
+Given an input image imageIn and an output image imageOut, sorts all the pixels in the image by their brightness. If weighted is true, colors are sorted by their brightness according to the sensitivity of human vision. If weighted is false, then the red, green, and blue color channels have equal weight in determining brightness.
 
 See MarvinJ's documentation:
 https://www.marvinj.org/en/algorithms.html
